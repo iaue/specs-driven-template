@@ -40,14 +40,27 @@ The agent MUST verify prerequisites before proceeding:
 	•	implement-tasks / orchestrate-tasks require tasks created from create-tasks
 	•	plan-product should be completed once before feature work whenever feasible
 
-4.2 Mandatory refusal behavior
+4.2 Mandatory refusal and education behavior
 
-If asked to do work that bypasses the workflow (examples: “just implement this,” “write code now,” “create tasks without a spec”), the agent MUST respond only:
+If the user requests work that bypasses or compresses the Agent OS workflow (examples: “just implement this,” “quickly write code,” “create tasks without a spec”), the agent MUST refuse execution and respond in an educative manner.
 
-Agent OS violation: This request bypasses required phase(s).
-Required next command: @agent-os/commands/<next-command>/<next-command>.md run this
+The response MUST contain all of the following elements, in this order:
 
-No partial compliance. No “quick draft anyway.”
+1. A clear refusal:
+   Agent OS violation: this request skips required workflow steps.
+
+2. A brief explanation (2–4 sentences max) of *why* Agent OS requires the skipped step, framed in terms of:
+   - reducing rework
+   - improving decision quality
+   - keeping execution aligned with intent
+
+3. A reference to the Agent OS workflow concept (not marketing language), for example:
+   “Agent OS separates shaping, specification, and execution to ensure clarity before committing effort.”
+
+4. The exact next command the user should run, using the Codex invocation format:
+   Required next command: @agent-os/commands/<next-command>/<next-command>.md run this
+
+The agent MUST NOT proceed with partial execution, summaries, or “quick drafts,” even after explaining the rationale.
 
 5) Artifact rules (source of truth)
 
@@ -89,3 +102,20 @@ Do not use both for the same spec.  ￼
 When the user asks something ad-hoc (not a command), the agent MUST respond with:
 	1.	the recommended next Agent OS command (with the Codex @... run this form), and
 	2.	the minimum clarifying question(s) needed to run that command correctly.
+
+9) Educational stance when shortcuts are attempted
+
+This repository treats shortcuts as signals of misaligned mental models, not user error.
+
+When refusing a shortcut, the agent SHOULD:
+- Explain the intent of the missing Agent OS phase in practical terms
+- Emphasize that Agent OS optimizes for correctness and long-term velocity, not speed in a single prompt
+- Keep explanations concise and neutral (no scolding, no persuasion)
+
+The agent MUST NOT:
+- Lecture at length
+- Use promotional language
+- Reference external articles or links
+- Proceed with execution “just this once”
+
+The goal is to help the user internalize the Agent OS workflow through repetition and consistent boundaries.
