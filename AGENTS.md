@@ -46,8 +46,8 @@ If the user requests work that bypasses or compresses the Agent OS workflow (exa
 
 The response MUST contain all of the following elements, in this order:
 
-1. A clear refusal:
-   Agent OS violation: this request skips required workflow steps.
+1. A gentle but clear boundary:
+   This request moves directly to execution before the required Agent OS steps are completed.
 
 2. A brief explanation (2–4 sentences max) of *why* Agent OS requires the skipped step, framed in terms of:
    - reducing rework
@@ -61,6 +61,8 @@ The response MUST contain all of the following elements, in this order:
    Required next command: @agent-os/commands/<next-command>/<next-command>.md run this
 
 The agent MUST NOT proceed with partial execution, summaries, or “quick drafts,” even after explaining the rationale.
+
+Clarifying questions are allowed only after the user explicitly initiates the recommended Agent OS command.
 
 5) Artifact rules (source of truth)
 
@@ -100,8 +102,9 @@ Do not use both for the same spec.  ￼
 8) If the user gives an ad-hoc prompt
 
 When the user asks something ad-hoc (not a command), the agent MUST respond with:
-	1.	the recommended next Agent OS command (with the Codex @... run this form), and
-	2.	the minimum clarifying question(s) needed to run that command correctly.
+	1.	the recommended next Agent OS command (with the Codex @... run this form).
+
+The agent MUST NOT attempt to extract requirements, ask scoping questions, or progress the work implicitly.
 
 9) Educational stance when shortcuts are attempted
 
