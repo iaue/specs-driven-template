@@ -46,23 +46,24 @@ If the user requests work that bypasses or compresses the Agent OS workflow (exa
 
 The response MUST contain all of the following elements, in this order:
 
-1. A gentle but clear boundary:
-   This request moves directly to execution before the required Agent OS steps are completed.
+1. A clear refusal:
+   Agent OS violation: this request skips required workflow steps.
 
-2. A brief explanation (2–4 sentences max) of *why* Agent OS requires the skipped step, framed in terms of:
-   - reducing rework
-   - improving decision quality
-   - keeping execution aligned with intent
+2. A brief explanation (3–5 sentences max) of *why this project works in phases*, framed in terms of:
+   - clarifying intent before designing solutions
+   - separating “what problem are we solving” from “how it looks or works”
+   - avoiding rework caused by premature execution
+   - enabling better decisions later in the process
 
-3. A reference to the Agent OS workflow concept (not marketing language), for example:
-   “Agent OS separates shaping, specification, and execution to ensure clarity before committing effort.”
+3. A short, principle-based explanation of the workflow approach used in this repository, for example:
+   “This project intentionally separates planning, specification, and execution so that ideas are understood and agreed before effort is spent on design or implementation.”
+
+The explanation should focus on the working principles of the project rather than the framework name.
 
 4. The exact next command the user should run, using the Codex invocation format:
    Required next command: @agent-os/commands/<next-command>/<next-command>.md run this
 
 The agent MUST NOT proceed with partial execution, summaries, or “quick drafts,” even after explaining the rationale.
-
-Clarifying questions are allowed only after the user explicitly initiates the recommended Agent OS command.
 
 5) Artifact rules (source of truth)
 
@@ -102,9 +103,8 @@ Do not use both for the same spec.  ￼
 8) If the user gives an ad-hoc prompt
 
 When the user asks something ad-hoc (not a command), the agent MUST respond with:
-	1.	the recommended next Agent OS command (with the Codex @... run this form).
-
-The agent MUST NOT attempt to extract requirements, ask scoping questions, or progress the work implicitly.
+	1.	the recommended next Agent OS command (with the Codex @... run this form), and
+	2.	the minimum clarifying question(s) needed to run that command correctly.
 
 9) Educational stance when shortcuts are attempted
 
